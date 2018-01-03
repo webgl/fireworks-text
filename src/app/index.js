@@ -69,11 +69,10 @@ export default class App {
 
     window.addEventListener('dblclick', this.explode, false);
     window.addEventListener('resize', this.onWindowResize, false);
-    this.onWindowResize();
   };
 
   openIntroModal = () => {
-
+    const TIP = `TIP: If on mobile, ensure to view in landscape mode.`;
     return modal({
       icon: this.name && 'info',
       title: this.name && `You've got a message from ${this.name}!`,
@@ -82,24 +81,24 @@ export default class App {
         read it in manual mode where you can double click
         to have the message explode and use mouse/touch
         to move around the scene.
+        
+        ${TIP}
       ` : `
         Go ahead and write a message to share with others.
         You can double click to have the message explode
         and use mouse/touch to move around the scene.
+        
+        ${TIP}
       `,
-      buttons: this.name && {
-        oneSec: {
-          text: 'Autoplay',
-          value: 1000
-        },
-        auto: {
-          text: 'Read',
-          value: Infinity
-        }
+      buttons: this.name ? {
+        Autoplay: { value: 1000  },
+        Read: { value: Infinity }
+      } : {
+        OK: { value: Infinity }
       }
     })
     .then((val) => {
-      this.config.textDisplayTime = this.name ? val : Infinity;
+      this.config.textDisplayTime = val;
     });
   };
 
