@@ -67,12 +67,12 @@ export default class App {
 
     target.appendChild(this.renderer.domElement);
 
-    // window.addEventListener('dblclick', this.explode, false);
+    window.addEventListener('dblclick', this.explode, false);
     window.addEventListener('resize', this.onWindowResize, false);
 
     // todo: refactor
     let lastTouch;
-    window.addEventListener('click', () => {
+    window.addEventListener('touchend', () => {
       const now = new Date().getTime();
       const lastTime = now - lastTouch;
       if ((lastTime < 600) && (lastTime > 0)) {
