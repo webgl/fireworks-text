@@ -72,7 +72,7 @@ export default class App {
   };
 
   openIntroModal = () => {
-    const TIP = `TIP: If on mobile, ensure to view in landscape mode.`;
+    const TIP = `TIP: Optimized for desktop.`;
     return modal({
       icon: this.name && 'info',
       title: this.name && `You've got a message from ${this.name}!`,
