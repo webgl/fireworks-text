@@ -69,6 +69,7 @@ export default class App {
 
     window.addEventListener('dblclick', this.explode, false);
     window.addEventListener('resize', this.onWindowResize, false);
+    window.addEventListener('orientationchange', this.onWindowResize, false);
 
     // todo: refactor
     let lastTouch;
