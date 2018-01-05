@@ -67,12 +67,23 @@ export default class App {
 
     target.appendChild(this.renderer.domElement);
 
-    window.addEventListener('dblclick', this.explode, false);
+    // window.addEventListener('dblclick', this.explode, false);
     window.addEventListener('resize', this.onWindowResize, false);
+
+    // todo: refactor
+    let lastTouch;
+    window.addEventListener('click', () => {
+      const now = new Date().getTime();
+      const lastTime = now - lastTouch;
+      if ((lastTime < 600) && (lastTime > 0)) {
+        this.explode();
+      }
+      lastTouch = new Date().getTime();
+    });
   };
 
   openIntroModal = () => {
-    const TIP = `TIP: Optimized for desktop.`;
+    const NOTE = `NOTE: Optimized for desktop.`;
     return modal({
       icon: this.name && 'info',
       title: this.name && `You've got a message from ${this.name}!`,
@@ -82,13 +93,13 @@ export default class App {
         to have the message explode and use mouse/touch
         to move around the scene.
         
-        ${TIP}
+        ${NOTE}
       ` : `
         Go ahead and write a message to share with others.
         You can double click to have the message explode
         and use mouse/touch to move around the scene.
         
-        ${TIP}
+        ${NOTE}
       `,
       buttons: this.name ? {
         Autoplay: { value: 1000  },
